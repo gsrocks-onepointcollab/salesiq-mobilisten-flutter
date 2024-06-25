@@ -1053,12 +1053,12 @@ extension SwiftMobilistenPlugin {
     }
     
     public func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) -> Bool {
-        guard internallyHandlesPushNotificationConfiguration else { return true }
+        guard internallyHandlesPushNotificationConfiguration else { return false }
         if ZohoSalesIQ.isMobilistenNotification(userInfo) {
             ZohoSalesIQ.processNotificationWithInfo(userInfo)
             completionHandler(.newData)
         }
-        return true
+        return false
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -1715,9 +1715,9 @@ extension SwiftMobilistenPlugin: ZohoSalesIQChatDelegate {
     }
     
     public func handleNotificationAction(_ payload: SalesIQNotificationPayload?) {
-        let notificationPayload = NotificationPlugin().getPayloadObjectEventDictionary(payload)
-        let event: [String: Any] = [MobilistenEvent.nameKey: MobilistenEvent.notificationClicked.rawValue,"payload": notificationPayload]
-        self.notificationEventSint?(event)
+//         let notificationPayload = NotificationPlugin().getPayloadObjectEventDictionary(payload)
+//         let event: [String: Any] = [MobilistenEvent.nameKey: MobilistenEvent.notificationClicked.rawValue,"payload": notificationPayload]
+//         self.notificationEventSint?(event)
     }
 }
  
